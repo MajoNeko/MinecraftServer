@@ -4,7 +4,7 @@ services:
     container_name: mc-server
     ports:
     # Exposes the ports so the container is reachable from the network
-      - "25565:25565"
+      - "8888:25565"
     environment:
     # memory used, for larger worlds, apply more memory
       MEMORY: "4G"

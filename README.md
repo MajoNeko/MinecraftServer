@@ -10,12 +10,33 @@ This projects explain how to host a Minecraft server (Java edition) running insi
 - [Usage](#usage)
   - [Configuration](#configuration)
   - [Modifying Behavior](#modifying-behavior)
-
+  - [Testing the Server](#testing-the-server)
+  
 ## Quickstart
 
 1. If you don't already have it installed, it is recommended to install Docker Desktop (on windows) to use Docker and Docker Compose. You can download and follow installation instructions here: <https://docs.docker.com/desktop/setup/install/windows-install/>
 
 2. Make sure you have the server.jar in the 'assets/' folder (or a valid download URL in the Dockerfile). It can be downloaded from <https://www.minecraft.net/en-us/download/server>
+
+3. Create .env file
+
+```bash
+cp example.env .env 
+```
+
+4. Start the server
+
+```bash
+docker compose up -d
+```
+
+5. Verify container is running
+
+```bash
+docker ps
+```
+
+6. Your server will now be reachable under: <CLOUD_VM_IP>:<SERVER_PORT>
 
 ## Project Structure
 
@@ -50,7 +71,7 @@ docker logs mc-server
 
 The server behaviour is controlled in three layers:
     - The Dockerfile: defines the base image, intalled packageds and the default startup command.
-    - Environment variables: set in "docker-compose.yaml" under the mc-server service. These override defaults at runtime. To change a value, edit the variable and restart:
+    - Environment variables: set in "docker-compose.yaml" (or the .env file) under the mc-server service. These override defaults at runtime. To change a value, edit the variable and restart:
     ```bash
     docker compose up -d
     ```
@@ -64,7 +85,7 @@ The server behaviour is controlled in three layers:
     docker compose build
     ```
 
-- To enable the whitelist settings, change the WHITELIST variable to  - WHITELIST: "true" in Compose, restart, then add players via the server console:
+- To enable the whitelist settings, change the WHITELIST variable to  - WHITELIST: "true" in Compose (or in the .env file), restart, then add players via the server console:
 
     ```bash
     whitelist add "username"
@@ -74,3 +95,36 @@ or by editing the whitelist.json in the volume.
 
 - For larger worlds, you can modify the MEMORY variable
 - To change the server port you can update the left side of "25565:25565" in Compose (eg: 25566:25565)
+
+### Testing the Server
+
+You can test the server using the [MC-Status](https://github.com/py-mine/mcstatus.git) Python tool.
+
+``` bash
+# 1. Clone mcstatus repository
+git clone https://github.com/py-mine/mcstatus.git
+cd mcstatus
+
+# 2. Create and activate Python virtual environment
+python -m venv venv
+.\venv\Scripts\activate.ps1   # PowerShell
+
+# 3. Install dependencies
+pip install -r requirements.txt
+# or:
+pip install mcstatus
+
+# 4. Check server status
+mcstatus <CLOUD_VM_IP>:<EXAMPLE_PORT_25565> status
+
+# Example output:
+version: Java 1.21.8 (protocol 772)
+motd: A Minecraft Server
+players: 0/20 No players online
+ping: 77.94 ms
+```
+
+> [!NOTE]
+> You can also test the server by playing the game in multiplayer. Connect with a Minecraft Java client using <CLOUD_VM_IP>:<EXAMPLE_PORT_25565>.
+
+---
