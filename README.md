@@ -1,5 +1,5 @@
 # MinecraftServer
-This projects explain how to host a Minecraft server running inside a Docker Container using Docker Compose. It provides a reliable, portable and reproducible server environment to be run on a cloud VM.
+This projects explain how to host a Minecraft server (Java edition) running inside a Docker Container using Docker Compose. It provides a reliable, portable and reproducible server environment to be run on a cloud VM.
 
 ## Table of Contents
 
