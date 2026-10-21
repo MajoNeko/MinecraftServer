@@ -10,9 +10,26 @@ COPY assets/server.jar /app/server.jar
 RUN echo "eula=true" > eula.txt
 
 #Environment variables
-ENV MEMORY=4G
+ENV MEMORY=4G \
+    PORT=25565 \
+    WHITELIST=false \
+    VIEW_DISTANCE=10 \
+    MAX_PLAYERS=20 \
+    MOTD="Don't Look Behind You Minecraft Server"
 
 EXPOSE $APP_PORT
 
 #Startup command
-CMD ["sh", "-c", "java -Xmx${MEMORY} -Xms${MEMORY} -jar server.jar nogui"]
+CMD ["sh", "-c", "\
+  if [ ! -f server.properties ]; then \
+    java -Xmx${MEMORY} -Xms${MEMORY} -jar server.jar nogui & \
+    SERVER_PID=$!; \
+    while [ ! -f server.properties ]; do sleep 1; done; \
+    kill $SERVER_PID; \
+  fi; \
+  sed -i 's/white-list=false/white-list=${WHITELIST}/' server.properties; \
+  sed -i 's/view-distance=10/view-distance=${VIEW_DISTANCE}/' server.properties; \
+  sed -i 's/max-players=20/max-players=${MAX_PLAYERS}/' server.properties; \
+  sed -i 's/motd=A Minecraft Server/motd=${MOTD}/' server.properties; \
+  exec java -Xmx${MEMORY} -Xms${MEMORY} -jar server.jar nogui \
+"]

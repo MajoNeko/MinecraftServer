@@ -1,0 +1,24 @@
+services:
+  minecraft:
+    build: .
+    container_name: mc-server
+    ports:
+    # Exposes the ports so the container is reachable from the network
+      - "25565:25565"
+    environment:
+    # memory used, for larger worlds, apply more memory
+      MEMORY: "4G"
+    # Enables or disables the server whitelist
+      WHITELIST: "false"
+    # How far players can see
+      VIEW_DISTANCE: "10"
+    # Maximum concurrent players
+      MAX_PLAYERS: "20"
+    # Message shown in the server list
+      MOTD: "Don't Look Behind You Minecraft Server"
+    volumes:
+      - mc-data:/app
+    restart: unless-stopped
+
+volumes:
+  mc-data: {}
