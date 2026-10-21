@@ -19,7 +19,8 @@ ENV MEMORY=4G \
 
 EXPOSE $APP_PORT
 
-#Startup command
+#Startup command ( TODO: should be moved to a script file)
+#checks if the server.properties file exists and then applies our default variables
 CMD ["sh", "-c", "\
   if [ ! -f server.properties ]; then \
     java -Xmx${MEMORY} -Xms${MEMORY} -jar server.jar nogui & \
@@ -27,7 +28,7 @@ CMD ["sh", "-c", "\
     while [ ! -f server.properties ]; do sleep 1; done; \
     kill $SERVER_PID; \
   fi; \
-  sed -i 's/white-list=false/white-list=${WHITELIST}/' server.properties; \
+  sed -i 's/white-list=.*/white-list=${WHITELIST}/' server.properties \
   sed -i 's/view-distance=10/view-distance=${VIEW_DISTANCE}/' server.properties; \
   sed -i 's/max-players=20/max-players=${MAX_PLAYERS}/' server.properties; \
   sed -i 's/motd=A Minecraft Server/motd=${MOTD}/' server.properties; \
