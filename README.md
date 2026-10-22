@@ -5,6 +5,7 @@ This projects explain how to host a Minecraft server (Java edition) running insi
 ## Table of Contents
 
 - [Introduction](#minecraft-server-docker)
+- [Prerequisites](#prerequisites)
 - [Quickstart](#quickstart)
 - [Project Structure](#project-structure)
 - [Usage](#usage)
@@ -12,31 +13,34 @@ This projects explain how to host a Minecraft server (Java edition) running insi
   - [Modifying Behavior](#modifying-behavior)
   - [Testing the Server](#testing-the-server)
   
+## Prerequisites
+
+If you don't already have it installed, it is recommended to install Docker Engine and Docker Compose. You can download and follow installation instructions here: <https://docs.docker.com/desktop/setup/install/windows-install/> (on windows)
+Make sure your host also has them installed.
+
 ## Quickstart
 
-1. If you don't already have it installed, it is recommended to install Docker Desktop (on windows) to use Docker and Docker Compose. You can download and follow installation instructions here: <https://docs.docker.com/desktop/setup/install/windows-install/>
+1. Make sure you have the server.jar in the 'assets/' folder (or a valid download URL in the Dockerfile). It can be downloaded from <https://www.minecraft.net/en-us/download/server>
 
-2. Make sure you have the server.jar in the 'assets/' folder (or a valid download URL in the Dockerfile). It can be downloaded from <https://www.minecraft.net/en-us/download/server>
-
-3. Create .env file
+2. Create .env file
 
 ```bash
 cp example.env .env 
 ```
 
-4. Start the server
+3. Start the server
 
 ```bash
 docker compose up -d
 ```
 
-5. Verify container is running
+4. Verify container is running
 
 ```bash
 docker ps
 ```
 
-6. Your server will now be reachable under: <CLOUD_VM_IP>:<SERVER_PORT>
+5. Your server will now be reachable under: <CLOUD_VM_IP>:<SERVER_PORT>
 
 ## Project Structure
 
