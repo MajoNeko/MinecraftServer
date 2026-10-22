@@ -28,9 +28,9 @@ CMD ["sh", "-c", "\
     while [ ! -f server.properties ]; do sleep 1; done; \
     kill $SERVER_PID; \
   fi; \
-  sed -i 's/white-list=.*/white-list=${WHITELIST}/' server.properties \
-  sed -i 's/view-distance=10/view-distance=${VIEW_DISTANCE}/' server.properties; \
-  sed -i 's/max-players=20/max-players=${MAX_PLAYERS}/' server.properties; \
-  sed -i 's/motd=A Minecraft Server/motd=${MOTD}/' server.properties; \
+  sed -i \"s/^white-list=.*/white-list=${WHITELIST}/\" server.properties; \
+  sed -i \"s/^view-distance=.*/view-distance=${VIEW_DISTANCE}/\" server.properties; \
+  sed -i \"s/^max-players=.*/max-players=${MAX_PLAYERS}/\" server.properties; \
+  sed -i \"s/^motd=.*/motd=${MOTD}/\" server.properties; \
   exec java -Xmx${MEMORY} -Xms${MEMORY} -jar server.jar nogui \
 "]
