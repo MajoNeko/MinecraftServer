@@ -50,6 +50,7 @@ docker ps
 - "Dockerfile" : Instructions for Docker to create a custom image with OpenJDK and the Minecraft server .jar.
 - "example.env" : Contains example environment variables to setup the project.
 - "README.md" : This document. Contains insructions on how to setup and deploy the server.
+- "assets/server.jar" : Here is the most important part, the actual minecraft server that will be bundled into our image. A more recent version or a different version can be obtained from the Minecraft website.
 
 ## Usage
 
