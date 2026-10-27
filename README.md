@@ -89,7 +89,7 @@ The server behaviour is controlled in three layers:
     docker compose build
     ```
 
-- To enable the whitelist settings, change the WHITELIST variable to  - WHITELIST: "true" in Compose (or in the .env file), restart, then add players via the server console:
+- To enable the whitelist settings, change the WHITELIST variable to  - WHITELIST: "true" in the .env file, restart, then add players via the server console:
 
     ```bash
     whitelist add "username"
@@ -98,7 +98,7 @@ The server behaviour is controlled in three layers:
 or by editing the whitelist.json in the volume.
 
 - For larger worlds, you can modify the MEMORY variable
-- To change the server port you can update the left side of "25565:25565" in Compose (eg: 25566:25565)
+- To change the server port you can update the PORT variable in in the .env file. 
 
 ### Testing the Server
 
@@ -129,6 +129,6 @@ ping: 77.94 ms
 ```
 
 > [!NOTE]
-> You can also test the server by playing the game in multiplayer. Connect with a Minecraft Java client using <CLOUD_VM_IP>:<EXAMPLE_PORT_25565>.
+> You can also test the server by playing the game in multiplayer. Connect with a Minecraft Java client using <CLOUD_VM_IP>:<SERVER_PORT>.
 
 ---

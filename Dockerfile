@@ -9,15 +9,15 @@ COPY assets/server.jar /app/server.jar
 #Accept the EULA
 RUN echo "eula=true" > eula.txt
 
-#Environment variables
-ENV MEMORY=4G \
-    PORT=25565 \
+#Environment variables defaults (True values come from .env)
+ENV MEMORY=2G \
+    PORT=8888 \
     WHITELIST=false \
     VIEW_DISTANCE=10 \
     MAX_PLAYERS=20 \
     MOTD="Don't Look Behind You Minecraft Server"
 
-EXPOSE $APP_PORT
+EXPOSE 25565
 
 #Startup command ( TODO: should be moved to a script file)
 #checks if the server.properties file exists and then applies our default variables
