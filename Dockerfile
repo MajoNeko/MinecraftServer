@@ -6,8 +6,10 @@ WORKDIR /app
 # Copy the server jar from your local assets folder
 COPY assets/server.jar /app/server.jar
 
-#Accept the EULA
-RUN echo "eula=true" > eula.txt
+# Copy the entrypoint script and make it executable
+COPY scripts/entrypoint.sh /app/entrypoint.sh
+
+RUN chmod +x /app/entrypoint.sh
 
 #Environment variables defaults (True values come from .env)
 ENV MEMORY=2G \
@@ -19,18 +21,5 @@ ENV MEMORY=2G \
 
 EXPOSE 25565
 
-#Startup command ( TODO: should be moved to a script file)
-#checks if the server.properties file exists and then applies our default variables
-CMD ["sh", "-c", "\
-  if [ ! -f server.properties ]; then \
-    java -Xmx${MEMORY} -Xms${MEMORY} -jar server.jar nogui & \
-    SERVER_PID=$!; \
-    while [ ! -f server.properties ]; do sleep 1; done; \
-    kill $SERVER_PID; \
-  fi; \
-  sed -i \"s/^white-list=.*/white-list=${WHITELIST}/\" server.properties; \
-  sed -i \"s/^view-distance=.*/view-distance=${VIEW_DISTANCE}/\" server.properties; \
-  sed -i \"s/^max-players=.*/max-players=${MAX_PLAYERS}/\" server.properties; \
-  sed -i \"s/^motd=.*/motd=${MOTD}/\" server.properties; \
-  exec java -Xmx${MEMORY} -Xms${MEMORY} -jar server.jar nogui \
-"]
+#Checks if the server.properties file exists and then applies our default variables
+ENTRYPOINT ["/app/entrypoint.sh"]
