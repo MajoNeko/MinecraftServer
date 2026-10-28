@@ -1,0 +1,25 @@
+services:
+  minecraft:
+    build: .
+    container_name: mc-server
+    ports:
+    # Exposes the ports so the container is reachable from the network
+      - "${PORT}:25565"
+    environment:
+    # memory used, for larger worlds, apply more memory
+      - MEMORY=${MEMORY}
+    # Enables or disables the server whitelist
+      - WHITELIST=${WHITELIST}
+    # How far players can see
+      - VIEW_DISTANCE=${VIEW_DISTANCE}
+    # Maximum concurrent players
+      - MAX_PLAYERS=${MAX_PLAYERS}
+    # Message shown in the server list
+      - MOTD=${MOTD}
+    mem_limit: ${MEMORY_LIMIT}
+    volumes:
+      - mc-data:/data
+    restart: unless-stopped
+
+volumes:
+  mc-data: {}
