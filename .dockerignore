@@ -7,6 +7,8 @@
 README.md
 *.md
 LICENSE
+*.pdf
+docs/
 
 # ---- Docker / Compose ----
 Dockerfile
