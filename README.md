@@ -28,19 +28,22 @@ Make sure your host also has them installed.
 cp example.env .env 
 ```
 
-3. Start the server
+> **⚠️ IMPORTANT**
+> 3. You must change the `EULA` value to `true` before you start the server.
+
+4. Start the server
 
 ```bash
 docker compose up -d
 ```
 
-4. Verify container is running
+5. Verify container is running
 
 ```bash
 docker ps
 ```
 
-5. Your server will now be reachable under: <CLOUD_VM_IP>:<SERVER_PORT>
+6. Your server will now be reachable under: <CLOUD_VM_IP>:<SERVER_PORT>
 
 ## Project Structure
 
@@ -57,20 +60,30 @@ docker ps
 ### Steps
 
 1. Clone the repository and place the 'server.jar' in the assets folder (if not already there).
-2. Start the server by running the following command:
+
+2. Create .env file
+
+```bash
+cp example.env .env 
+```
+
+> **⚠️ IMPORTANT**
+> 3. You must change the `EULA` value to `true` before you start the server.
+
+4. Start the server by running the following command:
 
 ```bash
 docker compose up -d
 ```
 
-3. To check if it started correctly use the following command:
+5. To check if it started correctly use the following command:
 
 ```bash
 docker compose ps
 docker logs mc-server
 ```
 
-4. Connect in Minecraft by running multiplayer - Add Server localhost:25565
+6. Connect in Minecraft by running multiplayer - Add Server localhost:25565
 
 ### Configuration
 
